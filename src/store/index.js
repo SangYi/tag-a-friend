@@ -13,15 +13,15 @@ class Base {
 class Store extends mix(Base).with(
   Authentication
 ) {
-  constructor() {
-    super()
-    const props = {
+  constructor(args) {
+    super(args)
+    // const props = {
 
-    };
-    const decorators = {
+    // };
+    // const decorators = {
 
-    };
-    extendObservable(this, props, decorators);
+    // };
+    // extendObservable(this, props, decorators);
   }
 };
 

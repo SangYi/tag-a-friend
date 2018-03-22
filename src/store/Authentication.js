@@ -54,7 +54,7 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
-          if (user.id) {
+          if (user) {
             console.log('user', user)
             // this.props.loadUser(user)
             // this.props.onRouteChange('home');

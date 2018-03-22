@@ -1,9 +1,7 @@
 import mix from 'lib/mix.js';
 import Authentication from './Authentication';
 
-class Base {};
-
-class Store extends mix(Base).with(
+class Store extends mix(class {}).with(
   Authentication
 ) {};
 

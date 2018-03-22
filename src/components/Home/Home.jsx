@@ -1,6 +1,8 @@
 import React from 'react';
 import { inject, observer } from "mobx-react";
 
+import ToolTip from 'components/ToolTip';
+
 const Home = ({
   store:{
     signout,    
@@ -14,6 +16,7 @@ const Home = ({
         signout()
         props.history.push("/");
       }}>Sign out</button>
+      <ToolTip />
     </div>
   )
 }

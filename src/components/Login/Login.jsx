@@ -2,12 +2,16 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import { Redirect } from "react-router-dom";
 const Login = ({
-  isAuthenticated,
-  redirectToReferrer,
-  signin,
+  // isAuthenticated,
+  // redirectToReferrer,
+  // signin,
+  store: {
+    isAuthenticated,
+    redirectToReferrer,
+    signin
+  },
   ...props
 }) => {
-  // console.log('props', props);
   const { from } = props.location.state || { from: { pathname: "/" } };
   return redirectToReferrer 
     ? <Redirect to={from} />
@@ -21,12 +25,12 @@ const Login = ({
     )
 }
 
-export default inject((stores) => {
-  const {isAuthenticated, redirectToReferrer, signin} = stores.store;
-  return {
-    isAuthenticated,
-    redirectToReferrer,
-    signin
-  }
-})(observer(Login));
-// export default inject("store")(observer(Login));
+// export default inject((stores) => {
+//   const {isAuthenticated, redirectToReferrer, signin} = stores.store;
+//   return {
+//     isAuthenticated,
+//     redirectToReferrer,
+//     signin
+//   }
+// })(observer(Login));
+export default inject("store")(observer(Login));

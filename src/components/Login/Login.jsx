@@ -1,14 +1,17 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import { Redirect } from "react-router-dom";
+
+import LoginForm from 'forms/LoginForm';
+
 const Login = ({
   // isAuthenticated,
   // redirectToReferrer,
-  // signin,
+  // login,
   store: {
     isAuthenticated,
     redirectToReferrer,
-    signin
+    login
   },
   ...props
 }) => {
@@ -20,17 +23,18 @@ const Login = ({
         <h2>Login</h2>
         <p>isAuthenticated - {isAuthenticated ? 'Yes': 'No'}</p>
         <p>redirectToReferrer - {redirectToReferrer ? 'Yes': 'No'}</p>
-        <button onClick={signin}>Enter</button>
+        {/* <button onClick={login}>Enter</button> */}
+        <LoginForm />
       </div>
     )
 }
 
 // export default inject((stores) => {
-//   const {isAuthenticated, redirectToReferrer, signin} = stores.store;
+//   const {isAuthenticated, redirectToReferrer, login} = stores.store;
 //   return {
 //     isAuthenticated,
 //     redirectToReferrer,
-//     signin
+//     login
 //   }
 // })(observer(Login));
 export default inject("store")(observer(Login));

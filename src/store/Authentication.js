@@ -61,10 +61,10 @@ const Authentication = (superclass) => class extends superclass {
           }
         })
       },
-      signin: (inputs) => {
+      login: (inputs) => {
         this.authenticate(inputs);
       },
-      signout: () => {
+      logout: () => {
         this.isAuthenticated = false;
         this.redirectToReferrer = false;
       }
@@ -72,8 +72,8 @@ const Authentication = (superclass) => class extends superclass {
     const decorators = {
       authenticate: action,
       register: action,
-      signin: action,
-      signout: action,
+      login: action,
+      logout: action,
     };
     extendObservable(this, props, decorators);
   };

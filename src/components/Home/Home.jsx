@@ -5,7 +5,7 @@ import ToolTip from 'components/ToolTip';
 
 const Home = ({
   store:{
-    signout,    
+    logout,    
   },
   ...props
 }) => {
@@ -13,7 +13,7 @@ const Home = ({
     <div>
       <h2>Home</h2>
       <button onClick={() => {
-        signout()
+        logout()
         props.history.push("/");
       }}>Sign out</button>
       <ToolTip />

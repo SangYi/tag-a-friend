@@ -3,10 +3,11 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const LoginForm = ({
-  store: {login}
+  store: {login},
+  historyPush
 }) => {
-  const usernameRegex = /^[a-zA-Z0-9]*$/i;
-  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  const usernameCheck = (username) => /^[a-zA-Z0-9]*$/i.test(username);
+  const emailCheck = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
   return (
     <Formik
       initialValues={{
@@ -17,9 +18,11 @@ const LoginForm = ({
         // same as above, but feel free to move this into a class method now.
         const {usernameOrEmail} = values;
         let errors = {};
-        if(!values.usernameOrEmail) {
+        
+        if(!usernameOrEmail) {
           errors.usernameOrEmail = 'Required';
-        } else if (!usernameRegex.test(usernameOrEmail) || emailRegex.test(usernameOrEmail)) {
+        } else if ( usernameCheck(usernameOrEmail) || emailCheck(usernameOrEmail)) {
+        } else {
           errors.usernameOrEmail = 'Invalid username or email';
         }
         
@@ -30,11 +33,11 @@ const LoginForm = ({
       }}
       onSubmit={(
         values,
-        { setSubmitting, setErrors, /* setValues and other goodies */ }
+        { setSubmitting, /*setErrors,  setValues and other goodies */ }
       ) => {
         setSubmitting(false);
         console.log('values in login', values)
-        login(values);
+        login(values, historyPush);
       }}
       render={({
         values,

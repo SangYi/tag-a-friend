@@ -10,14 +10,15 @@ const Authentication = (superclass) => class extends superclass {
       // isAuthenticating: false,
       redirectToReferrer: false,
       // Actions
-      authenticate: (inputs = {}) => {
-        const {username, email, password} = inputs
+      authenticate: (inputs = {}, changeRoute) => {
+        const {usernameOrEmail, password} = inputs;
         fetch('http://localhost:3005/signin', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            username,
-            email,
+            // username,
+            // email,
+            usernameOrEmail,
             password,
           })
         })
@@ -27,7 +28,9 @@ const Authentication = (superclass) => class extends superclass {
           if(user) {
             this.isAuthenticated = true;
             setTimeout( () => {
-            this.redirectToReferrer = true
+            // changeRoute(`${usernameOrEmail}/dash`)
+            changeRoute(`/`)
+            // this.redirectToReferrer = true
             }, 1000)
           }
           // if (user.id) {
@@ -61,12 +64,12 @@ const Authentication = (superclass) => class extends superclass {
           }
         })
       },
-      login: (inputs) => {
-        this.authenticate(inputs);
+      login: (inputs, changeRoute) => {
+        this.authenticate(inputs, changeRoute);
       },
       logout: () => {
         this.isAuthenticated = false;
-        this.redirectToReferrer = false;
+        // this.redirectToReferrer = false;
       }
     };
     const decorators = {

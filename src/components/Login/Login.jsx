@@ -1,6 +1,6 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 import LoginForm from 'forms/LoginForm';
 
@@ -15,18 +15,27 @@ const Login = ({
   },
   ...props
 }) => {
-  const { from } = props.location.state || { from: { pathname: "/" } };
-  return redirectToReferrer 
-    ? <Redirect to={from} />
-    : (
-      <div>
-        <h2>Login</h2>
-        <p>isAuthenticated - {isAuthenticated ? 'Yes': 'No'}</p>
-        <p>redirectToReferrer - {redirectToReferrer ? 'Yes': 'No'}</p>
-        {/* <button onClick={login}>Enter</button> */}
-        <LoginForm />
-      </div>
-    )
+  return (
+    <div>
+      <h2>Login</h2>
+      <p>isAuthenticated - {isAuthenticated ? 'Yes': 'No'}</p>
+      <p>redirectToReferrer - {redirectToReferrer ? 'Yes': 'No'}</p>
+      {/* <button onClick={login}>Enter</button> */}
+      <LoginForm historyPush={props.history.push}/>
+    </div>
+  )
+  // const { from } = props.location.state || { from: { pathname: "/" } };
+  // return redirectToReferrer 
+  //   ? <Redirect to={from} />
+  //   : (
+  //     <div>
+  //       <h2>Login</h2>
+  //       <p>isAuthenticated - {isAuthenticated ? 'Yes': 'No'}</p>
+  //       <p>redirectToReferrer - {redirectToReferrer ? 'Yes': 'No'}</p>
+  //       {/* <button onClick={login}>Enter</button> */}
+  //       <LoginForm historyPush={props.history.push}/>
+  //     </div>
+  //   )
 }
 
 // export default inject((stores) => {

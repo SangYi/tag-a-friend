@@ -1,5 +1,5 @@
 import React from 'react';
-import PhotoModal from 'components/PhotoModal';
+import Modal from 'components/Modal';
 
 class PhotoCollection extends React.Component {
   constructor(props) {
@@ -10,14 +10,18 @@ class PhotoCollection extends React.Component {
     const {isModalOpen} = this.state;
     return (
       <div>
+        <h2>Photo Collection</h2>
         <button onClick={() => this.openModal()}>Open modal</button>
         { 
           isModalOpen &&
-          <PhotoModal isOpen={isModalOpen} onClose={this.closeModal}>
+          <Modal 
+            isOpen={isModalOpen} 
+            onClose={this.closeModal}
+          >
             <h1>Modal title</h1>
             <p>hello</p>
             <p><button onClick={this.closeModal}>Close</button></p>
-          </PhotoModal>
+          </Modal>
         }
       </div>
     )

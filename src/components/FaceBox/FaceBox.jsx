@@ -1,10 +1,19 @@
 import React from 'react';
+import './FaceBox.css';
 
-const Facebox = () => {
+const Facebox = ({
+  box: {topRow, rightCol, bottomRow, leftCol},
+  ...props
+}) => {
   return (
-    <div>
-      <h2>FaceBox</h2>
-    </div>
+    <div className='bounding-box' 
+      style={{
+        top: topRow, 
+        right: rightCol, 
+        bottom: bottomRow, 
+        left: leftCol
+      }}
+    />
   )
 }
 

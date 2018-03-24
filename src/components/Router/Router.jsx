@@ -8,7 +8,7 @@ import UserDash from 'components/UserDash';
 import UserSettings from 'components/UserSettings';
 import UserPage from 'components/UserPage';
 import UserProfile from 'components/UserProfile';
-
+import UserLayout from 'components/UserLayout';
 import PhotoCollection from 'components/PhotoCollection';
 
 import PrivateRoute from 'components/PrivateRoute';
@@ -17,7 +17,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <PrivateRoute exact path="/" component={UserDash} publicComponent={Home}/>
+        <PrivateRoute exact path="/" 
+          component={UserDash} 
+          publicComponent={Home}
+          layout={UserLayout}
+        />
         {/* <Route exact path="/" component={Home} /> */}
         <PrivateRoute exact path="/:user/dash" component={UserDash} />
         <PrivateRoute exact path="/:user/settings" component={UserSettings} />

@@ -1,7 +1,7 @@
 import React from 'react';
 // import './PhotoModal.css';
 
-const PhotoModal = ({
+const Modal = ({
   onClose,
   ...props
 }) => {
@@ -29,20 +29,17 @@ const PhotoModal = ({
       <div /*className={props.className}*/ style={modalStyle}>
         {props.children}
       </div>
-      {
-        !props.noBackdrop &&
-        <div 
-          className={props.backdropClassName} 
+      <div 
+          // className={props.backdropClassName} 
           style={backdropStyle}
           onClick={e => {
             e.preventDefault()
             onClose()
           }}
         />
-      }
     </div>
   )
 }
 
-export default PhotoModal;
+export default Modal;
 //peteris.rocks/blog/modal-window-in-react-from-scratch/

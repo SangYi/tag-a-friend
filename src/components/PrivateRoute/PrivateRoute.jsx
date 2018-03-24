@@ -8,13 +8,18 @@ const PrivateRoute = ({
   },
   component: Component,
   publicComponent: PublicComponent,
+  layout: Layout,
   ...rest
 }) => {
   return (
     <Route {...rest}
       render={ props => {
         return isAuthenticated 
-        ? <Component {...props} /> 
+        ? Layout
+          ? <Layout>
+              <Component {...props} />
+            </Layout>
+          : <Component {...props} />
         : PublicComponent
           ? <PublicComponent />
           : <Redirect
@@ -25,7 +30,7 @@ const PrivateRoute = ({
             />
         }
       }
-  />
+    />
   )
 }
 

@@ -1,38 +1,35 @@
 import React from 'react';
 import PhotoModal from 'components/PhotoModal';
 
-const PhotoCollection = () => {
-  var modal = document.getElementById('myModal');
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-      modal.style.display = "block";
+class PhotoCollection extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { isModalOpen: false }
+  }
+  render() {
+    const {isModalOpen} = this.state;
+    return (
+      <div>
+        <button onClick={() => this.openModal()}>Open modal</button>
+        { 
+          isModalOpen &&
+          <PhotoModal isOpen={isModalOpen} onClose={this.closeModal}>
+            <h1>Modal title</h1>
+            <p>hello</p>
+            <p><button onClick={this.closeModal}>Close</button></p>
+          </PhotoModal>
+        }
+      </div>
+    )
   }
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-      modal.style.display = "none";
+  openModal = () => {
+    this.setState({ isModalOpen: true })
   }
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
+  closeModal = () => {
+    this.setState({ isModalOpen: false })
   }
-  return (
-    <div>
-      <h2>PhotoCollection</h2>
-      <button id="myBtn">Open Modal</button>
-      <PhotoModal />
-    </div>
-  )
-}
+};
 
 export default PhotoCollection;

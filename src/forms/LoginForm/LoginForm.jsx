@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 
 const LoginForm = ({
   store: {login},
-  historyPush
+  changeRoute
 }) => {
   const usernameCheck = (username) => /^[a-zA-Z0-9]*$/i.test(username);
   const emailCheck = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
@@ -37,7 +37,7 @@ const LoginForm = ({
       ) => {
         setSubmitting(false);
         console.log('values in login', values)
-        login(values, historyPush);
+        login(values, changeRoute);
       }}
       render={({
         values,

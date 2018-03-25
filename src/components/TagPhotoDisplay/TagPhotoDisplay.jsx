@@ -1,18 +1,24 @@
 import React from 'react';
+import {inject, observer} from 'mobx-react';
+
 // import './TagPhotoDisplay.css';
 
 import FaceBox from 'components/FaceBox';
 
 const TagPhotoDisplay = ({
-  imageUrl,
-  boxes,
+  store: {
+    imageUrl,
+    boxes,
+  },
   ...props
 }) => {
+  console.log('boxes', boxes);
   return (
     <div>
+      <h2>TagPhotoDisplay</h2>
       <div>
       <img id='inputimage' alt='' src={imageUrl} width='80%' height='auto'/>
-      {boxes && boxes.map( (box, i) => {
+      {boxes.map( (box, i) => {
         return <FaceBox key={i} box={box}/>
         // return <div key={i} className='bounding-box' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
       })}
@@ -21,4 +27,4 @@ const TagPhotoDisplay = ({
   )
 }
 
-export default TagPhotoDisplay;
+export default inject('store')(observer(TagPhotoDisplay));

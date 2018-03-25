@@ -1,8 +1,9 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
 import {Link} from "react-router-dom";
-// import ToolTip from 'components/ToolTip';
+
 import ImageLinkForm from 'forms/ImageLinkForm';
+import TagPhotoDisplay from 'components/TagPhotoDisplay';
 
 const UserDash = ({
   match,
@@ -20,7 +21,7 @@ const UserDash = ({
         </li> */}
       </ul>
       <ImageLinkForm />
-      {/* <ToolTip /> */}
+      <TagPhotoDisplay />
       <br/>
     </div>
   )

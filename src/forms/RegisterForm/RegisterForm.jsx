@@ -3,7 +3,8 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const RegisterForm = ({
-  store: {register}
+  store: {register},
+  changeRoute
 }) => (
   <Formik
     initialValues={{
@@ -39,7 +40,7 @@ const RegisterForm = ({
     ) => {
       setSubmitting(false);
       console.log('values in register', values)
-      register(values);
+      register(values, changeRoute);
     }}
     render={({
       values,

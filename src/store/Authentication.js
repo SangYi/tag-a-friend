@@ -26,24 +26,18 @@ const Authentication = (superclass) => class extends superclass {
         .then(user => {
           console.log('user', user)
           if(user) {
-            this.isAuthenticated = true;
             setTimeout( () => {
-            // changeRoute(`${usernameOrEmail}/dash`)
-            changeRoute(`/`)
-            // this.redirectToReferrer = true
-            }, 1000)
+              this.isAuthenticated = true;
+              // changeRoute(`/`)
+            }, 500)
           }
           // if (user.id) {
           //   this.props.loadUser(user)
           //   this.props.onRouteChange('home');
           // }
         })
-        // this.isAuthenticated = true;
-        // setTimeout( () => {
-        //   this.redirectToReferrer = true
-        // }, 1000)
       },
-      register: (inputs) => {
+      register: (inputs, changeRoute) => {
         const {name, username, email, password} = inputs;
         fetch('http://localhost:3005/register', {
           method: 'post',
@@ -57,10 +51,12 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
+          console.log('user', user)
           if (user) {
-            console.log('user', user)
-            // this.props.loadUser(user)
-            // this.props.onRouteChange('home');
+            setTimeout( () => {
+              this.isAuthenticated = true;
+              // changeRoute(`/`)
+            }, 500)
           }
         })
       },
@@ -69,7 +65,6 @@ const Authentication = (superclass) => class extends superclass {
       },
       logout: () => {
         this.isAuthenticated = false;
-        // this.redirectToReferrer = false;
       }
     };
     const decorators = {

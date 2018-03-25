@@ -1,24 +1,27 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
-import ToolTip from 'components/ToolTip';
+import {Link} from "react-router-dom";
+// import ToolTip from 'components/ToolTip';
+import ImageLinkForm from 'forms/ImageLinkForm';
 
 const UserDash = ({
-  store: {
-    logout
-  },
   match,
   ...props
 }) => {
   return (
     <div>
       <h2>UserDash - {match.params && match.params.user}</h2>
-        <button 
-          onClick={() => {
-            logout()
-            props.history.push("/");
-          }}>Sign out
-        </button>
-        <ToolTip />
+      <ul>
+        <li>
+          <Link to="/test/photos">My Photos</Link>
+        </li>
+        {/* <li>
+          <Link to="/protected">Protected Page</Link>
+        </li> */}
+      </ul>
+      <ImageLinkForm />
+      {/* <ToolTip /> */}
+      <br/>
     </div>
   )
 }

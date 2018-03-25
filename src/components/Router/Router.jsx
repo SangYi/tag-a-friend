@@ -25,6 +25,10 @@ const Router = () => {
         {/* <Route exact path="/" component={Home} /> */}
         <PrivateRoute exact path="/:user/dash" component={UserDash} />
         <PrivateRoute exact path="/:user/settings" component={UserSettings} />
+        <PrivateRoute exact path="/:user/photos"
+          component={PhotoCollection} 
+          layout={UserLayout}
+        />
         {/* <Redirect from="/user" to="/" /> */}
         <Route path='/register' component={Register} />
         <Route path="/login" component={Login} />

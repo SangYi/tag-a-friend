@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const ImageLinkForm = ({
-  store: {login}
+  store: {onImageSubmit}
 }) => {
   return (
     <Formik
@@ -27,7 +27,7 @@ const ImageLinkForm = ({
         { setSubmitting, setErrors, /* setValues and other goodies */ }
       ) => {
         setSubmitting(false);
-        console.log('values in login', values)
+        console.log('values in ImageLink', values)
       }}
       render={({
         values,
@@ -42,7 +42,7 @@ const ImageLinkForm = ({
           <input
             type="imageUrl"
             name="imageUrl"
-            placeholder="Username or Email"
+            placeholder="Enter image url"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.imageUrl}

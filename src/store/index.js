@@ -1,10 +1,10 @@
 import mix from 'lib/mix.js';
 import Authentication from './Authentication';
-import User from './User';
+import UserAccount from './UserAccount';
 
 class Store extends mix(class {}).with(
   Authentication,
-  User
+  UserAccount
 ) {};
 
 export default Store;

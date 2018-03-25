@@ -12,7 +12,7 @@ const Authentication = (superclass) => class extends superclass {
       // Actions
       authenticate: (inputs = {}, changeRoute) => {
         const {usernameOrEmail, password} = inputs;
-        fetch('http://localhost:3005/signin', {
+        fetch('http://localhost:3005/login', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -24,7 +24,7 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
-          // console.log('user', user)
+          console.log('user', user)
           if(user) {
             this.isAuthenticated = true;
             setTimeout( () => {

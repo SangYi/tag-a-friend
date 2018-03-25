@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'components/Modal';
 
+import TagPhotoDisplay from 'components/TagPhotoDisplay';
+
 class PhotoCollection extends React.Component {
   constructor(props) {
     super(props)
@@ -20,6 +22,7 @@ class PhotoCollection extends React.Component {
           >
             <h1>Modal title</h1>
             <p>hello</p>
+            <TagPhotoDisplay />
             <p><button onClick={this.closeModal}>Close</button></p>
           </Modal>
         }

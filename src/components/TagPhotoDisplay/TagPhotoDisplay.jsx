@@ -1,7 +1,7 @@
 import React from 'react';
 // import './TagPhotoDisplay.css';
 
-import FaceBox from 'components/Facebox';
+import FaceBox from 'components/FaceBox';
 
 const TagPhotoDisplay = ({
   imageUrl,

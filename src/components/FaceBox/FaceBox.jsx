@@ -1,7 +1,7 @@
 import React from 'react';
 import './FaceBox.css';
 
-const Facebox = ({
+const FaceBox = ({
   box: {topRow, rightCol, bottomRow, leftCol},
   ...props
 }) => {

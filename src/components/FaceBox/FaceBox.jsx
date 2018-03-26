@@ -6,14 +6,16 @@ const FaceBox = ({
   ...props
 }) => {
   return (
-    <div className='bounding-box' 
+    <div className='bounding-box tooltip' 
       style={{
         top: topRow, 
         right: rightCol, 
         bottom: bottomRow, 
         left: leftCol
       }}
-    />
+    >
+      <span className="tooltiptext">Tooltip text</span>
+    </div>
   )
 }
 

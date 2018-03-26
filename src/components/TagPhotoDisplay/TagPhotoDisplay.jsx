@@ -16,12 +16,17 @@ const TagPhotoDisplay = ({
   return (
     <div>
       <h2>TagPhotoDisplay</h2>
-      <div>
-      <img id='inputimage' alt='' src={imageUrl} width='80%' height='auto'/>
-      {boxes.map( (box, i) => {
-        return <FaceBox key={i} box={box}/>
-        // return <div key={i} className='bounding-box' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
-      })}
+      <div style={{ 
+        position: 'absolute',
+        display: 'inline-block',
+        width: '80%'
+        // minWidth: '100px'
+      }}>
+        <img id='inputimage' alt='' src={imageUrl} width='100%' height='auto'/>
+        {boxes.map( (box, i) => {
+          return <FaceBox key={i} box={box}/>
+          // return <div key={i} className='bounding-box' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
+        })}
       </div>
     </div>
   )

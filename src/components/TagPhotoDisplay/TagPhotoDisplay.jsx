@@ -17,7 +17,7 @@ const TagPhotoDisplay = ({
     <div>
       <h2>TagPhotoDisplay</h2>
       <div style={{ 
-        position: 'absolute',
+        position: 'relative',
         display: 'inline-block',
         width: '80%'
         // minWidth: '100px'

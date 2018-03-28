@@ -12,7 +12,7 @@ const Authentication = (superclass) => class extends superclass {
       // Actions
       authenticate: (inputs = {}, changeRoute) => {
         const {usernameOrEmail, password} = inputs;
-        fetch('http://localhost:3005/login', {
+        fetch(`${this.url}/login`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -39,7 +39,7 @@ const Authentication = (superclass) => class extends superclass {
       },
       register: (inputs, changeRoute) => {
         const {name, username, email, password} = inputs;
-        fetch('http://localhost:3005/register', {
+        fetch(`${this.url}/register`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({

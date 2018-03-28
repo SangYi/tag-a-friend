@@ -15,7 +15,7 @@ const UserAccount = (superclass) => class extends superclass {
       },
       handleImageSubmit: (imageUrl) => {
         this.imageUrl = imageUrl;
-        fetch('http://localhost:3005/imageurl', {
+        fetch(`${this.url}/imageurl`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({

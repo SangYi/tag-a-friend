@@ -7,6 +7,7 @@ const UserAccount = (superclass) => class extends superclass {
       user: {},
       imageUrl: '',
       boxes: [],
+      photo: {},
       loadUser: () => {
 
       },
@@ -25,11 +26,28 @@ const UserAccount = (superclass) => class extends superclass {
         .then(response => response.json())
         .then(response => {
           console.log('response', response);
-          //TEMP
-            this.boxes = this.calculateFaceLocations(response);
-          //TEMP
+          // //TEMP
+          //   this.boxes = this.calculateFaceLocations(response);
+          // //TEMP
+          if(response) {
+            const calculatedFaces = this.calculateFaceLocations(response);
+            fetch(`${this.url}/photos`, {
+              method: 'post',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                imageUrl,
+                faces: calculatedFaces
+              }) 
+            })
+            .then(response => response.json())
+            .then(photoObj => {
+              this.photo = photoObj;
+            })
+            .catch(err => console.log('error', err))
+          }
         })
-      }
+        .catch(err => console.log('error', err))
+      } //End of handleImageSubmit
     };
     const decorators = {
       // user: observable,

@@ -26,25 +26,26 @@ const UserAccount = (superclass) => class extends superclass {
         .then(response => response.json())
         .then(response => {
           console.log('response', response);
-          // //TEMP
-          //   this.boxes = this.calculateFaceLocations(response);
-          // //TEMP
-          if(response) {
-            const calculatedFaces = this.calculateFaceLocations(response);
-            fetch(`${this.url}/photos`, {
-              method: 'post',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({
-                imageUrl,
-                faces: calculatedFaces
-              }) 
-            })
-            .then(response => response.json())
-            .then(photoObj => {
-              this.photo = photoObj;
-            })
-            .catch(err => console.log('error', err))
-          }
+          //TEMP
+            this.boxes = this.calculateFaceLocations(response);
+          //TEMP
+
+          // if(response) {
+          //   const calculatedFaces = this.calculateFaceLocations(response);
+          //   fetch(`${this.url}/photos`, {
+          //     method: 'post',
+          //     headers: {'Content-Type': 'application/json'},
+          //     body: JSON.stringify({
+          //       imageUrl,
+          //       faces: calculatedFaces
+          //     }) 
+          //   })
+          //   .then(response => response.json())
+          //   .then(photoObj => {
+          //     this.photo = photoObj;
+          //   })
+          //   .catch(err => console.log('error', err))
+          // }
         })
         .catch(err => console.log('error', err))
       } //End of handleImageSubmit
@@ -58,20 +59,15 @@ const UserAccount = (superclass) => class extends superclass {
     extendObservable(this, props, decorators);
   };
   calculateFaceLocations = (data) => {
-    console.log('data', data);
-    // const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const clarifaiFaces = data.outputs[0].data.regions; //[0].region_info.bounding_box;
-    const image = document.getElementById('inputimage');
-    const width = Number(image.width);
-    const height = Number(image.height);
+    const clarifaiFaces = data.outputs[0].data.regions;
 
     return clarifaiFaces.map( clarifaiFace => {
       const {left_col, top_row, right_col, bottom_row} = clarifaiFace.region_info.bounding_box;
       return {
-        leftCol: left_col * width,
-        topRow: top_row * height,
-        rightCol: width - (right_col * width),
-        bottomRow: height - (bottom_row * height)
+        left: +(left_col * 100).toFixed(1),
+        top: +(top_row * 100).toFixed(1),
+        right: +( right_col * 100).toFixed(1),
+        bottom: +( bottom_row * 100).toFixed(1),
       };
     });
   }

@@ -6,13 +6,13 @@
   justify-content: center;
   cursor: pointer;
 }
-
+/***
 .tooltip {
-  /* position: relative;
-  display: inline-block; */
-  /* border-bottom: 1px dotted black; */
+  position: relative;
+  display: inline-block;
+   border-bottom: 1px dotted black;
 }
-
+***/
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -23,7 +23,7 @@
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  top: 150%;
+  top: 110%;
   left: 50%;
   margin-left: -60px;
 }

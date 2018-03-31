@@ -6,13 +6,17 @@ const UserAccount = (superclass) => class extends superclass {
     const props = {
       user: {},
       imageUrl: '',
-      boxes: [],
-      photo: {},
+      currentPhoto: {
+        faces: []
+      },
+      photos: [],
       loadUser: (data) => {
         this.user = data;
       },
       removeUser: () => {
         this.user = {};
+        this.imageUrl = '';
+        this.photos = [];
       },
       handleImageSubmit: (inputs) => {
         const { imageUrl, user_id } = inputs;
@@ -26,37 +30,49 @@ const UserAccount = (superclass) => class extends superclass {
           })
         })
         .then(response => response.json())
-        .then(response => {
-          console.log('response', response);
-          //TEMP
-            this.boxes = this.calculateFaceLocations(response);
-          //TEMP
-
-          // if(response) {
-          //   const calculatedFaces = this.calculateFaceLocations(response);
-          //   fetch(`${this.url}/photos`, {
-          //     method: 'post',
-          //     headers: {'Content-Type': 'application/json'},
-          //     body: JSON.stringify({
-          //       imageUrl,
-          //       faces: calculatedFaces
-          //     }) 
-          //   })
-          //   .then(response => response.json())
-          //   .then(photoObj => {
-          //     this.photo = photoObj;
-          //   })
-          //   .catch(err => console.log('error', err))
-          // }
+        .then(faces => {
+          this.currentPhoto = {
+            url: this.imageUrl,
+            faces,
+          }
         })
         .catch(err => console.log('error', err))
-      } //End of handleImageSubmit
+      }, //End of handleImageSubmit
+      handleNameSubmit: (input) => {
+        const {name, photo_id} = input;
+        fetch(`${this.url}/photos/${photo_id}`, {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            photo_id,
+            name
+          })
+        })
+        .then(response => response.json())
+        .then(res => {
+          console.log('res', res)
+          //not finished
+        })
+        .catch(err => console.log('error', err))
+      },
+      handleGetPhotos: () => {
+        fetch(`${this.url}/photos/${this.user.user_id}`)
+        .then(response => response.json())
+        .then(photos => {
+          this.photos = photos;
+        })
+      },
+      setCurrentPhoto: (photo) => {
+        this.currentPhoto = photo;
+      }
     };
     const decorators = {
       // user: observable,
       loadUser: action,
       removeUser: action,
       handleImageSubmit: action,
+      handleGetPhotos: action,
+      setCurrentPhoto: action
     };
     extendObservable(this, props, decorators);
   };

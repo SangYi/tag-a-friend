@@ -22,14 +22,9 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
-          console.log('user', user)
           if(user.user_id) {
             this.loadUser(user);
             this.isAuthenticated = true;
-            // setTimeout( () => {
-            //   this.isAuthenticated = true;
-            //   // changeRoute(`/`)
-            // }, 500)
           }
         })
       },
@@ -47,15 +42,8 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
-          console.log('user', user);
           this.loadUser(user);
           this.isAuthenticated = true;
-          // if (user) {
-          //   setTimeout( () => {
-          //     this.isAuthenticated = true;
-          //     // changeRoute(`/`)
-          //   }, 500)
-          // }
         })
       },
       login: (inputs, changeRoute) => {

@@ -4,7 +4,6 @@ import LoginForm from 'forms/LoginForm';
 import RegisterForm from 'forms/RegisterForm';
 
 const Home = (props) => {
-  console.log('props', props)
   return (
     <div>
       <h2>Home</h2>

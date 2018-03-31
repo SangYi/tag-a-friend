@@ -1,6 +1,5 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
-
 // import './TagPhotoDisplay.css';
 
 import FaceBox from 'components/FaceBox';
@@ -9,10 +8,11 @@ const TagPhotoDisplay = ({
   store: {
     imageUrl,
     boxes,
+    currentPhoto,
   },
   ...props
 }) => {
-  console.log('boxes', boxes);
+  const { url, faces } = currentPhoto;
   return (
     <div>
       <h2>TagPhotoDisplay</h2>
@@ -20,12 +20,10 @@ const TagPhotoDisplay = ({
         position: 'relative',
         display: 'inline-block',
         width: '80%'
-        // minWidth: '100px'
       }}>
-        <img id='inputimage' alt='' src={imageUrl} width='100%' height='auto'/>
-        {boxes.map( (box, i) => {
-          return <FaceBox key={i} box={box}/>
-          // return <div key={i} className='bounding-box' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
+        <img id='inputimage' alt='' src={url || imageUrl} width='100%' height='auto'/>
+        {faces.map( face => {
+          return <FaceBox key={face.face_id} box={face}/>
         })}
       </div>
     </div>

@@ -8,19 +8,21 @@ const UserAccount = (superclass) => class extends superclass {
       imageUrl: '',
       boxes: [],
       photo: {},
-      loadUser: () => {
-
+      loadUser: (data) => {
+        this.user = data;
       },
       removeUser: () => {
-
+        this.user = {};
       },
-      handleImageSubmit: (imageUrl) => {
+      handleImageSubmit: (inputs) => {
+        const { imageUrl, user_id } = inputs;
         this.imageUrl = imageUrl;
         fetch(`${this.url}/imageurl`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            input: imageUrl
+            imageUrl,
+            user_id,
           })
         })
         .then(response => response.json())

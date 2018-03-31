@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const ImageLinkForm = ({
-  store: {handleImageSubmit}
+  store: {handleImageSubmit, user}
 }) => {
   return (
     <Formik
@@ -28,7 +28,10 @@ const ImageLinkForm = ({
       ) => {
         setSubmitting(false);
         console.log('values in ImageLink', values)
-        handleImageSubmit(values.imageUrl);
+        handleImageSubmit({
+          imageUrl: values.imageUrl,
+          user_id: user.user_id
+        });
       }}
       render={({
         values,

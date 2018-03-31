@@ -16,8 +16,6 @@ const Authentication = (superclass) => class extends superclass {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            // username,
-            // email,
             usernameOrEmail,
             password,
           })
@@ -25,16 +23,14 @@ const Authentication = (superclass) => class extends superclass {
         .then(response => response.json())
         .then(user => {
           console.log('user', user)
-          if(user) {
-            setTimeout( () => {
-              this.isAuthenticated = true;
-              // changeRoute(`/`)
-            }, 500)
+          if(user.user_id) {
+            this.loadUser(user);
+            this.isAuthenticated = true;
+            // setTimeout( () => {
+            //   this.isAuthenticated = true;
+            //   // changeRoute(`/`)
+            // }, 500)
           }
-          // if (user.id) {
-          //   this.props.loadUser(user)
-          //   this.props.onRouteChange('home');
-          // }
         })
       },
       register: (inputs, changeRoute) => {
@@ -51,19 +47,22 @@ const Authentication = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(user => {
-          console.log('user', user)
-          if (user) {
-            setTimeout( () => {
-              this.isAuthenticated = true;
-              // changeRoute(`/`)
-            }, 500)
-          }
+          console.log('user', user);
+          this.loadUser(user);
+          this.isAuthenticated = true;
+          // if (user) {
+          //   setTimeout( () => {
+          //     this.isAuthenticated = true;
+          //     // changeRoute(`/`)
+          //   }, 500)
+          // }
         })
       },
       login: (inputs, changeRoute) => {
         this.authenticate(inputs, changeRoute);
       },
       logout: () => {
+        this.removeUser();
         this.isAuthenticated = false;
       }
     };

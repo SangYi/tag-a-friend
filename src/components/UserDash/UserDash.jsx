@@ -6,15 +6,17 @@ import ImageLinkForm from 'forms/ImageLinkForm';
 import TagPhotoDisplay from 'components/TagPhotoDisplay';
 
 const UserDash = ({
+  store: { user },
   match,
   ...props
 }) => {
   return (
     <div>
-      <h2>UserDash - {match.params && match.params.user}</h2>
+      <h2>UserDash</h2>
+      <h3>Welcome back {user.name}! </h3>
       <ul>
         <li>
-          <Link to="/test/photos">My Photos</Link>
+          <Link onClick={()=> console.log('clicked!!!')}to={`/${user.username}/photos`}>My Photos</Link>
         </li>
         {/* <li>
           <Link to="/protected">Protected Page</Link>

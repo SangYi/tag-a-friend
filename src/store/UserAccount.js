@@ -39,18 +39,25 @@ const UserAccount = (superclass) => class extends superclass {
         .catch(err => console.log('error', err))
       }, //End of handleImageSubmit
       handleNameSubmit: (input) => {
-        const {name, photo_id} = input;
-        fetch(`${this.url}/photos/${photo_id}`, {
+        const {name, face_id} = input;
+        fetch(`${this.url}/photos/${face_id}`, {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            photo_id,
             name
           })
         })
         .then(response => response.json())
         .then(res => {
           console.log('res', res)
+          // {
+          //   "faceId": "1",
+          //   "name": "John"
+          // }
+          const {faceId, name} = res;
+
+          const faceIndex = this.currentPhoto.faces.map(face=>face.face_id).index(faceId)
+          this.currentPhoto.faces[faceIndex].name = name;
           //not finished
         })
         .catch(err => console.log('error', err))

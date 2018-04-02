@@ -3,14 +3,15 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const SubmitNameForm = ({
-  store: { handleNameSubmit, currentPhoto },
+  store: { handleNameSubmit, selectedPhoto, toggleChangeName },
   face_id,
+  faceIndex,
   className
 }) => {
   return (
     <Formik
       initialValues={{
-        name: currentPhoto.name || '',
+        name: selectedPhoto.faces[faceIndex].name || '',
       }}
       validate={values => {
         // same as above, but feel free to move this into a class method now.
@@ -34,6 +35,7 @@ const SubmitNameForm = ({
           name: values.name,
           face_id,
         });
+        toggleChangeName();
       }}
       render={({
         values,

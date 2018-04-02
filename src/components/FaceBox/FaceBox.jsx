@@ -5,13 +5,23 @@ import './FaceBox.css';
 import SubmitNameForm from 'forms/SubmitNameForm';
 
 const FaceBox = ({
-  box: {topframe, rightframe, bottomframe, leftframe, name, face_id, changeName},
-  handleNameChange,
+  face: {topframe, rightframe, bottomframe, leftframe, name, face_id},
+  faceIndex,
+  changeName,
+  toggleChangeName,
   ...props
 }) => {
+  console.log('changeName', changeName)
   return (
     <div className='bounding-box tooltip' 
-      onDoubleClick={()=> console.log('double clicked!!!')}
+      onDoubleClick={()=> {
+        console.log('faceIndex on onDoubleClick');
+        toggleChangeName()
+      }}
+      onMouseLeave={()=> {
+        console.log('faceIndex on onMouseLeave');
+        changeName && toggleChangeName()
+      }}
       style={{
         top: `${topframe}%`, 
         right: `${100 - rightframe}%`, 
@@ -20,9 +30,10 @@ const FaceBox = ({
       }}
     >
       { 
-        (name || changeName) 
+        // (name && !!((changeName && changeName.get()))===false)
+        (name && changeName===false)
         ? <span className="tooltiptext">{name}</span>
-        : <SubmitNameForm className="nameinput" face_id={face_id}/>
+        : <SubmitNameForm className="nameinput" {...{face_id, faceIndex}}/>
       } 
     </div>
   )

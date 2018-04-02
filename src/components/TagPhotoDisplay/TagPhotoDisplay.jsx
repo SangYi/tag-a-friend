@@ -8,11 +8,13 @@ const TagPhotoDisplay = ({
   store: {
     imageUrl,
     boxes,
-    currentPhoto,
+    selectedPhoto,
+    changeName,
+    toggleChangeName,
   },
   ...props
 }) => {
-  const { url, faces } = currentPhoto;
+  const { url, faces } = selectedPhoto;
   return (
     <div>
       <h2>TagPhotoDisplay</h2>
@@ -22,8 +24,10 @@ const TagPhotoDisplay = ({
         width: '80%'
       }}>
         <img id='inputimage' alt='' src={url || imageUrl} width='100%' height='auto'/>
-        {faces.map( face => {
-          return <FaceBox key={face.face_id} box={face}/>
+        {faces.map( (face, faceIndex) => {
+          // return <FaceBox key={face.face_id} box={face}/>
+          // return <FaceBox key={face.face_id}  face={face} {...{faceIndex,toggleChangeName}}/>
+          return <FaceBox key={face.face_id}  {...{face, faceIndex, changeName, toggleChangeName}}/>
         })}
       </div>
     </div>

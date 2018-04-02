@@ -5,7 +5,6 @@ const UserLayout = ({
   store: {logout},
   ...props
 }) => {
-  // console.log('userlayout props', props)
   return (
     <div>
       <nav>

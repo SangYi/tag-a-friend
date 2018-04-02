@@ -1,4 +1,4 @@
-import { action, extendObservable } from 'mobx';
+import { action, observable, extendObservable } from 'mobx';
 
 const UserAccount = (superclass) => class extends superclass {
   constructor(args) {
@@ -6,10 +6,11 @@ const UserAccount = (superclass) => class extends superclass {
     const props = {
       user: {},
       imageUrl: '',
-      currentPhoto: {
+      photos: [],
+      selectedPhoto: {
         faces: []
       },
-      photos: [],
+      changeName: false,
       loadUser: (data) => {
         this.user = data;
       },
@@ -17,6 +18,9 @@ const UserAccount = (superclass) => class extends superclass {
         this.user = {};
         this.imageUrl = '';
         this.photos = [];
+        this.selectedPhoto = {
+          faces: []
+        };
       },
       handleImageSubmit: (inputs) => {
         const { imageUrl, user_id } = inputs;
@@ -31,7 +35,7 @@ const UserAccount = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(faces => {
-          this.currentPhoto = {
+          this.selectedPhoto = {
             url: this.imageUrl,
             faces,
           }
@@ -50,9 +54,9 @@ const UserAccount = (superclass) => class extends superclass {
         .then(response => response.json())
         .then(res => {
           const {faceId, name} = res;
-          const faceIndex = this.currentPhoto.faces.map(face=>face.face_id).indexOf(+faceId)
+          const faceIndex = this.selectedPhoto.faces.map(face=>face.face_id).indexOf(+faceId)
 
-          this.currentPhoto.faces[faceIndex].name = name;
+          this.selectedPhoto.faces[faceIndex].name = name;
         })
         .catch(err => console.log('error', err))
       },
@@ -63,16 +67,22 @@ const UserAccount = (superclass) => class extends superclass {
           this.photos = photos;
         })
       },
-      setCurrentPhoto: (photo) => {
-        this.currentPhoto = photo;
-      }
+      setSelectedPhoto: (photo) => {
+        this.selectedPhoto = photo;
+      },
+      toggleChangeName: () => {
+        console.log('fired')
+        this.changeName = !this.changeName
+        // this.selectedPhoto.faces[index].name = this.selectedPhoto.faces[index].name + '!';
+      }      
     };
     const decorators = {
       loadUser: action,
       removeUser: action,
       handleImageSubmit: action,
       handleGetPhotos: action,
-      setCurrentPhoto: action
+      setSelectedPhoto: action,
+      toggleChangeName: action,
     };
     extendObservable(this, props, decorators);
   };

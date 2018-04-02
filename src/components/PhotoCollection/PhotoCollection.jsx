@@ -12,8 +12,7 @@ class PhotoCollection extends React.Component {
   }
   render() {
     const {isModalOpen} = this.state;
-    const {photos, setCurrentPhoto} = this.props.store;
-    // console.log('props in photocollection', this.props.store.photos)
+    const {photos, setSelectedPhoto} = this.props.store;
     return (
       <div>
         <h2>Photo Collection</h2>
@@ -23,7 +22,7 @@ class PhotoCollection extends React.Component {
             return <img 
               key={photo_id}
               onClick={() => {
-                setCurrentPhoto(photo);
+                setSelectedPhoto(photo);
                 this.openModal();
               }}
               src={url} alt='' 
@@ -38,7 +37,6 @@ class PhotoCollection extends React.Component {
             onClose={this.closeModal}
           >
             <h1>Modal title</h1>
-            <p>hello</p>
             <TagPhotoDisplay />
             <p><button onClick={this.closeModal}>Close</button></p>
           </Modal>

@@ -11,15 +11,12 @@ const FaceBox = ({
   toggleChangeName,
   ...props
 }) => {
-  console.log('changeName', changeName)
   return (
     <div className='bounding-box tooltip' 
       onDoubleClick={()=> {
-        console.log('faceIndex on onDoubleClick');
         toggleChangeName()
       }}
       onMouseLeave={()=> {
-        console.log('faceIndex on onMouseLeave');
         changeName && toggleChangeName()
       }}
       style={{
@@ -30,7 +27,6 @@ const FaceBox = ({
       }}
     >
       { 
-        // (name && !!((changeName && changeName.get()))===false)
         (name && changeName===false)
         ? <span className="tooltiptext">{name}</span>
         : <SubmitNameForm className="nameinput" {...{face_id, faceIndex}}/>

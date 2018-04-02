@@ -1,8 +1,10 @@
 import React from 'react';
 import './FaceBox.css';
 
+import SubmitNameForm from 'forms/SubmitNameForm';
+
 const FaceBox = ({
-  box: {topframe, rightframe, bottomframe, leftframe, name},
+  box: {topframe, rightframe, bottomframe, leftframe, name, face_id},
   ...props
 }) => {
   return (
@@ -14,7 +16,12 @@ const FaceBox = ({
         left: `${leftframe}%`,
       }}
     >
-      {name ? <span className="tooltiptext">{name}</span> : <input className="nameinput" type="text" placeholder="Enter a name" />} 
+      { 
+        name 
+        ? <span className="tooltiptext">{name}</span>
+        : <SubmitNameForm face_id={face_id}/>
+          // : <input className="nameinput" type="text" placeholder="Enter a name" />
+      } 
     </div>
   )
 }

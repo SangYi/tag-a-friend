@@ -2,22 +2,23 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
-const ImageLinkForm = ({
-  store: { handleImageSubmit, user }
+const SubmitNameForm = ({
+  store: { handleNameSubmit },
+  face_id
 }) => {
   return (
     <Formik
       initialValues={{
-        imageUrl: '',
+        name: '',
       }}
       validate={values => {
         // same as above, but feel free to move this into a class method now.
-        const {imageUrl} = values;
+        const {name} = values;
         let errors = {};
-        if(!imageUrl) {
-          errors.imageUrl = 'Required';
-        } else if (!imageUrl) {
-          errors.imageUrl = 'Required';
+        if(!name) {
+          errors.name = 'Required';
+        } else if (!name) {
+          errors.name = 'Required';
         }
         
         return errors;
@@ -27,10 +28,10 @@ const ImageLinkForm = ({
         { setSubmitting, setErrors, /* setValues and other goodies */ }
       ) => {
         setSubmitting(false);
-        console.log('values in ImageLink', values)
-        handleImageSubmit({
-          imageUrl: values.imageUrl,
-          user_id: user.user_id
+        console.log('values in SubmitNameForm', values)
+        handleNameSubmit({
+          name: values.name,
+          face_id,
         });
       }}
       render={({
@@ -44,14 +45,14 @@ const ImageLinkForm = ({
       }) => (
         <form onSubmit={handleSubmit}>
           <input
-            type="imageUrl"
-            name="imageUrl"
-            placeholder="Enter image url"
+            type="name"
+            name="name"
+            placeholder="Enter a name"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.imageUrl}
+            value={values.name}
           /><br />
-          {touched.imageUrl && errors.imageUrl && <div>{errors.imageUrl}</div>}
+          {touched.name && errors.name && <div>{errors.name}</div>}
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
@@ -59,6 +60,6 @@ const ImageLinkForm = ({
       )}
     />
   )
-};
+}
 
-export default inject('store')(observer(ImageLinkForm))
+export default inject('store')(observer(SubmitNameForm));

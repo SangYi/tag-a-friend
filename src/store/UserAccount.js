@@ -1,4 +1,4 @@
-import { action, /*observable,*/ extendObservable } from 'mobx';
+import { action, extendObservable } from 'mobx';
 
 const UserAccount = (superclass) => class extends superclass {
   constructor(args) {
@@ -49,16 +49,10 @@ const UserAccount = (superclass) => class extends superclass {
         })
         .then(response => response.json())
         .then(res => {
-          console.log('res', res)
-          // {
-          //   "faceId": "1",
-          //   "name": "John"
-          // }
           const {faceId, name} = res;
+          const faceIndex = this.currentPhoto.faces.map(face=>face.face_id).indexOf(+faceId)
 
-          const faceIndex = this.currentPhoto.faces.map(face=>face.face_id).index(faceId)
           this.currentPhoto.faces[faceIndex].name = name;
-          //not finished
         })
         .catch(err => console.log('error', err))
       },
@@ -74,7 +68,6 @@ const UserAccount = (superclass) => class extends superclass {
       }
     };
     const decorators = {
-      // user: observable,
       loadUser: action,
       removeUser: action,
       handleImageSubmit: action,

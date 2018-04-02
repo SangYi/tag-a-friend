@@ -31,7 +31,6 @@ class PhotoCollection extends React.Component {
             />
           })}
         </div>
-        {/* <button onClick={() => this.openModal()}>Open modal</button> */}
         { 
           isModalOpen &&
           <Modal 

@@ -3,13 +3,14 @@ import { inject, observer } from 'mobx-react';
 import { Formik } from 'formik';
 
 const SubmitNameForm = ({
-  store: { handleNameSubmit },
-  face_id
+  store: { handleNameSubmit, currentPhoto },
+  face_id,
+  className
 }) => {
   return (
     <Formik
       initialValues={{
-        name: '',
+        name: currentPhoto.name || '',
       }}
       validate={values => {
         // same as above, but feel free to move this into a class method now.
@@ -43,7 +44,7 @@ const SubmitNameForm = ({
         handleSubmit,
         isSubmitting,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <form className={className} onSubmit={handleSubmit}>
           <input
             type="name"
             name="name"
@@ -53,9 +54,6 @@ const SubmitNameForm = ({
             value={values.name}
           /><br />
           {touched.name && errors.name && <div>{errors.name}</div>}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
         </form>
       )}
     />

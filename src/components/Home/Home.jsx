@@ -5,8 +5,8 @@ import RegisterForm from 'forms/RegisterForm';
 
 const Home = (props) => {
   return (
-    <div>
-      <h2>Home</h2>
+    <div className="home">
+      <h2 className="home__header">Home</h2>
       <p>Welcome to Tag A Friend!!!</p>
       <div>
         <h2>Login</h2>

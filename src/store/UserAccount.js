@@ -1,4 +1,4 @@
-import { action, observable, extendObservable } from 'mobx';
+import { action, extendObservable } from 'mobx';
 
 const UserAccount = (superclass) => class extends superclass {
   constructor(args) {

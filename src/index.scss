@@ -1,21 +1,14 @@
+@import "sass/abstracts/functions";
+@import "sass/abstracts/mixins";
+@import "sass/abstracts/variables";
+
+@import "sass/base/animations";
+@import "sass/base/base";
+@import "sass/base/typography";
+@import "sass/base/utilities";
+
+//Components
 @import "components/Home/homestyle";
 
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-
-  box-sizing: border-box;
-}
+//Layouts
+@import "sass/layout/grid";
